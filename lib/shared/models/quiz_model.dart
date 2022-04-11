@@ -6,20 +6,20 @@ enum Level { facil, medio, dificil, perito}
 
 extension LevelStringExt on String {
   Level get parse => {
-    "facil": Level.facil, 
-    "medio": Level.medio, 
-    "dificil": Level.dificil, 
-    "perito": Level.perito
-    }[this]!;
+        "facil": Level.facil,
+        "medio": Level.medio,
+        "dificil": Level.dificil,
+        "perito": Level.perito
+      }[this]!;
 }
 
 extension LevelExt on Level {
   String get parse => {
-    Level.facil: "facil", 
-    Level.medio: "medio", 
-    Level.dificil: "dificil", 
-    Level.perito: "perito"
-    }[this]!;
+        Level.facil: "facil",
+        Level.medio: "medio",
+        Level.dificil: "dificil",
+        Level.perito: "perito",
+      }[this]!;
 }
 
 class QuizModel {
@@ -29,35 +29,37 @@ class QuizModel {
   final String imagem;
   final Level level;
 
-  QuizModel({required this.title, 
-  required this.questions, 
-  this.questionAnswered=0, 
-  required this.imagem, 
-  required this.level});
+  QuizModel({
+    required this.title,
+    required this.questions,
+    this.questionAnswered = 0,
+    required this.imagem,
+    required this.level,
+  });
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-  
-    result.addAll({'title': title});
-    result.addAll({'questions': questions.map((x) => x.toMap()).toList()});
-    result.addAll({'questionAnswered': questionAnswered});
-    result.addAll({'imagem': imagem});
-    result.addAll({'level': level.parse});
-  
-    return result;
+    return {
+      'title': title,
+      'questions': questions.map((x) => x.toMap()).toList(),
+      'questionAnswered': questionAnswered,
+      'imagem': imagem,
+      'level': level.parse,
+    };
   }
 
   factory QuizModel.fromMap(Map<String, dynamic> map) {
     return QuizModel(
-      title: map['title'] ?? '',
-      questions: List<QuestionModel>.from(map['questions']?.map((x) => QuestionModel.fromMap(x))),
-      questionAnswered: map['questionAnswered']?.toInt() ?? 0,
-      imagem: map['imagem'] ?? '',
+      title: map['title'],
+      questions: List<QuestionModel>.from(
+          map['questions']?.map((x) => QuestionModel.fromMap(x))),
+      questionAnswered: map['questionAnswered'],
+      imagem: map['imagem'],
       level: map['level'].toString().parse,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory QuizModel.fromJson(String source) => QuizModel.fromMap(json.decode(source));
+  factory QuizModel.fromJson(String source) =>
+      QuizModel.fromMap(json.decode(source));
 }

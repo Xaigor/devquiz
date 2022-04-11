@@ -7,12 +7,10 @@ class AnswerModel {
   AnswerModel({required this.title, this.isRight = false});
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-  
-    result.addAll({'title': title});
-    result.addAll({'isRight': isRight});
-  
-    return result;
+    return {
+      'title': title,
+      'isRight': isRight,
+    };
   }
 
   factory AnswerModel.fromMap(Map<String, dynamic> map) {
@@ -24,5 +22,6 @@ class AnswerModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AnswerModel.fromJson(String source) => AnswerModel.fromMap(json.decode(source));
+  factory AnswerModel.fromJson(String source) => 
+  AnswerModel.fromMap(json.decode(source));
 }

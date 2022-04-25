@@ -2,6 +2,7 @@ import 'package:DevQuiz/challenge/challenge_controller.dart';
 import 'package:DevQuiz/challenge/widgets/next_button/next_button_widget.dart';
 import 'package:DevQuiz/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:DevQuiz/challenge/widgets/quiz/quiz_wiget.dart';
+import 'package:DevQuiz/result/result_page.dart';
 import 'package:DevQuiz/shared/models/question_model.dart';
 import 'package:flutter/material.dart';
 
@@ -25,9 +26,9 @@ class _ChallengePageState extends State<ChallengePage> {
   }
 
   void nextPage() {
-    if(controller.currentPage < widget.questions.length)
-    pageController.nextPage(
-        duration: Duration(milliseconds: 100), curve: Curves.linear);
+    if (controller.currentPage < widget.questions.length)
+      pageController.nextPage(
+          duration: Duration(milliseconds: 100), curve: Curves.linear);
   }
 
   @override
@@ -75,15 +76,19 @@ class _ChallengePageState extends State<ChallengePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         if (value < widget.questions.length)
-                        Expanded(
-                            child: NextButtonWidget.white(
-                                label: "Pular", onTap: nextPage)),
+                          Expanded(
+                              child: NextButtonWidget.white(
+                                  label: "Pular", onTap: nextPage)),
                         if (value == widget.questions.length)
                           Expanded(
                               child: NextButtonWidget.green(
                                   label: "Confirmar",
                                   onTap: () {
-                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ResultPage()));
                                   })),
                       ],
                     ))),

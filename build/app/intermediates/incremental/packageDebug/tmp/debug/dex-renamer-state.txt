@@ -1,4 +1,0 @@
-#Tue Apr 05 17:12:44 BRT 2022
-base.0=D\:\\Desenvolvimento\\Visual-Studio-Code-workspace\\nlw5-flutter\\devquiz\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
